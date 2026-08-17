@@ -7,7 +7,7 @@ const { userInfoFetcher, totalCommitsFetcher } = require('./fetch');
 const numeral = require('numeral');
 
 const gistId = process.env.GIST_ID;
-const githubToken = process.env.GH_TOKEN || process.env.GH_PAT;
+const githubToken = (process.env.GH_TOKEN || process.env.GH_PAT || '').trim();
 const countAllCommits = process.env.ALL_COMMITS === 'true';
 const kFormat = process.env.K_FORMAT === 'true';
 
