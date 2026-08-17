@@ -26,13 +26,13 @@ jobs:
 
       - name: Run commit count updater
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }} # 또는 GH_PAT
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           bash .github/scripts/update-commit-count.sh
 
       - name: Commit & push README if changed (use token for authentication)
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
