@@ -22,7 +22,7 @@ jobs:
 
       - name: Run stats updater
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
           GIST_ID: ${{ secrets.GIST_ID }}
           # 옵션: 아래를 필요에 따라 설정 (true/false)
           ALL_COMMITS: 'true'
