@@ -1,0 +1,35 @@
+name: Update pinned gist with GitHub stats
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'   # 12시간마다 (원래 README와 동일)
+  workflow_dispatch: {}
+
+jobs:
+  update-gist:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run stats updater
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GIST_ID: ${{ secrets.GIST_ID }}
+          # 옵션: 아래를 필요에 따라 설정 (true/false)
+          ALL_COMMITS: 'true'
+          K_FORMAT: 'true'
+        run: |
+          node index.js
+
+      - name: Show gist updated info
+        if: ${{ success() }}
+        run: echo "Updater finished. Check Actions logs & your gist."
